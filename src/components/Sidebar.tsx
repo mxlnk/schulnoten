@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useStore } from '../store/useStore';
 
-export function Sidebar() {
+export function Sidebar({ onShowImpressum }: { onShowImpressum: () => void }) {
   const classes = useStore((state) => state.classes);
   const selectedClassId = useStore((state) => state.selectedClassId);
   const addClass = useStore((state) => state.addClass);
@@ -96,6 +96,15 @@ export function Sidebar() {
           </button>
         )}
       </nav>
+
+      <div className="p-3 border-t border-gray-200">
+        <button
+          onClick={onShowImpressum}
+          className="text-xs text-gray-400 hover:text-gray-600"
+        >
+          Impressum & Datenschutz
+        </button>
+      </div>
     </aside>
   );
 }
