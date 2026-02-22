@@ -15,6 +15,7 @@ interface StoreActions {
 
   // Schüler
   addStudent: (classId: string, firstName: string, lastName: string) => void;
+  addStudentsBulk: (classId: string, students: { firstName: string; lastName: string }[]) => void;
   updateStudent: (classId: string, studentId: string, firstName: string, lastName: string) => void;
   deleteStudent: (classId: string, studentId: string) => void;
 
@@ -100,6 +101,21 @@ export const useStore = create<Store>()(
           classes: state.classes.map((c) =>
             c.id === classId
               ? { ...c, students: [...c.students, newStudent] }
+              : c
+          ),
+        }));
+      },
+
+      addStudentsBulk: (classId, students) => {
+        const newStudents: Student[] = students.map((s) => ({
+          id: generateId(),
+          firstName: s.firstName,
+          lastName: s.lastName,
+        }));
+        set((state) => ({
+          classes: state.classes.map((c) =>
+            c.id === classId
+              ? { ...c, students: [...c.students, ...newStudents] }
               : c
           ),
         }));
