@@ -230,7 +230,7 @@ export function GradeSheet() {
                   idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
                 }`}
               >
-                <td className="sticky left-0 bg-inherit border-r border-gray-200 p-2 font-medium group">
+                <td className="sticky left-0 bg-inherit border-r border-gray-200 p-2 font-medium group" data-testid={`student-${student.id}`}>
                   <div className="flex items-center justify-between">
                     <span>
                       {student.lastName}, {student.firstName}
@@ -262,6 +262,7 @@ export function GradeSheet() {
                         <td
                           key={exam.id}
                           className="p-0 border-r border-gray-100 min-w-[80px]"
+                          data-testid={`grade-${student.id}-${exam.id}`}
                         >
                           <GradeCell
                             value={getGrade(grades, student.id, exam.id)}
@@ -280,13 +281,14 @@ export function GradeSheet() {
                       <td
                         key={`avg-${category.id}`}
                         className="p-0 border-r border-gray-300 bg-gray-50 min-w-[70px]"
+                        data-testid={`avg-${student.id}-${category.id}`}
                       >
                         <GradeCell value={categoryAvg} onChange={() => {}} readOnly isAverage />
                       </td>
                     </>
                   );
                 })}
-                <td className="p-0 bg-gray-100 min-w-[80px]">
+                <td className="p-0 bg-gray-100 min-w-[80px]" data-testid={`final-${student.id}`}>
                   <GradeCell
                     value={calculateFinalGrade(selectedSubject, student.id)}
                     onChange={() => {}}

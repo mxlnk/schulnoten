@@ -4,7 +4,7 @@ import { GradeSheet } from './GradeSheet';
 import { AddStudentModal } from './AddStudentModal';
 import { AddCategoryModal } from './AddCategoryModal';
 import { AddExamModal } from './AddExamModal';
-import { ExportImportMenu } from './ExportImportMenu';
+import { CsvExportButton } from './CsvExportButton';
 
 export function ClassView() {
   const selectedClass = useSelectedClass();
@@ -142,7 +142,7 @@ export function ClassView() {
             Klausur
           </button>
           <div className="flex-1" />
-          <ExportImportMenu />
+          <CsvExportButton />
         </div>
       )}
 
