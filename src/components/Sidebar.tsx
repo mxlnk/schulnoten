@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../store/useStore';
+import { FileMenu } from './FileMenu';
 
 export function Sidebar({ onShowImpressum }: { onShowImpressum: () => void }) {
   const classes = useStore((state) => state.classes);
@@ -29,9 +30,7 @@ export function Sidebar({ onShowImpressum }: { onShowImpressum: () => void }) {
 
   return (
     <aside className="w-64 bg-gray-100 border-r border-gray-200 flex flex-col h-full">
-      <div className="p-4 border-b border-gray-200">
-        <h1 className="text-lg font-semibold text-gray-800">Schulnoten</h1>
-      </div>
+      <FileMenu />
 
       <div className="p-3">
         <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">

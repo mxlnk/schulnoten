@@ -46,9 +46,13 @@ export function Impressum({ onClose }: { onClose: () => void }) {
               </a>.
             </p>
             <p className="mt-2">
-              Die Anwendung selbst speichert alle Daten ausschließlich lokal in Ihrem
-              Browser (LocalStorage). Es werden keine Daten an einen Server übertragen,
-              keine Cookies gesetzt und keine Analyse- oder Tracking-Tools eingesetzt.
+              Die Anwendung selbst speichert alle Daten ausschließlich lokal: im
+              Speicher Ihres Browsers (LocalStorage, IndexedDB) sowie – nur auf Ihre
+              Veranlassung – in .noten-Dateien an einem von Ihnen gewählten Ort auf
+              Ihrem Gerät. Wird die App installiert, legt der Browser zudem eine Kopie
+              der Programmdateien für die Offline-Nutzung ab. Es werden keine Daten an
+              einen Server übertragen, keine Cookies gesetzt und keine Analyse- oder
+              Tracking-Tools eingesetzt.
             </p>
           </section>
           <section>

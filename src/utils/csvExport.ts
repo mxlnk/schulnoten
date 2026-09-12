@@ -1,31 +1,7 @@
 import Papa from 'papaparse';
+import { downloadBlob } from './download';
 import type { SchoolClass, Subject } from '../types';
 import { calculateCategoryAverage, calculateFinalGrade, getGrade, formatGrade } from './gradeCalculations';
-
-export function exportToJson(data: { classes: SchoolClass[] }): void {
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  downloadBlob(blob, 'schulnoten-backup.json');
-}
-
-export function importFromJson(file: File): Promise<{ classes: SchoolClass[] }> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string);
-        if (!data.classes || !Array.isArray(data.classes)) {
-          throw new Error('Ungültiges Dateiformat');
-        }
-        resolve(data);
-      } catch (error) {
-        reject(new Error('Fehler beim Lesen der Datei'));
-      }
-    };
-    reader.onerror = () => reject(new Error('Fehler beim Lesen der Datei'));
-    reader.readAsText(file);
-  });
-}
 
 export function exportSubjectToCsv(schoolClass: SchoolClass, subject: Subject): void {
   const rows: string[][] = [];
@@ -80,13 +56,3 @@ export function exportSubjectToCsv(schoolClass: SchoolClass, subject: Subject): 
   downloadBlob(blob, `${schoolClass.name}-${subject.name}.csv`);
 }
 
-function downloadBlob(blob: Blob, filename: string): void {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
